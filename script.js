@@ -72,6 +72,59 @@ function addBooksToLibrary() {
   }
 }
 
+let modal = document.getElementById("new-book-modal");
+let addNewBookBtn = document.getElementById("new-book-btn");
+let span = document.getElementsByClassName("close")[0];
+let titleInput = document.getElementById("title-input");
+let authorInput = document.getElementById("author-input");
+let pagesInput = document.getElementById("pages-input");
+addNewBookBtn.onclick = function() {
+  modal.style.display = "block";
+  let ogBorderColor = rs.getPropertyValue("--input-border-color")
+  titleInput.value = "";
+  titleInput.style.borderColor = ogBorderColor;
+  authorInput.value = "";
+  authorInput.style.borderColor = ogBorderColor;
+  pagesInput.value = "";
+  pagesInput.style.borderColor = ogBorderColor;
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+let submitButton = document.getElementById("submit-btn");
+let notReadInput = document.getElementById("not-read-input");
+let readInput = document.getElementById("read-input");
+submitButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (titleInput.value === "") {
+    titleInput.style.borderColor = "red";
+    return;
+  } else if (authorInput.value === "") {
+    authorInput.style.borderColor = "red";
+    return;
+  } else if (pagesInput.value === "") {
+    pagesInput.style.borderColor = "red";
+    return;
+  }
+  modal.style.display = "none";
+  let book = new Book(
+    titleInput.value, 
+    authorInput.value, 
+    pagesInput.value,
+    Boolean(notReadInput.checked) ? notReadInput.value : readInput.value
+  )
+  myLibrary.push(book);
+  addBookToLibrary(book);
+});
+
 myLibrary.push(new Book("The Lord of the Rings", "J. R. R. Tolkien", "700", "not read"));
 myLibrary.push(new Book("The Hobbit", "J. R. R. Tolkien", "500", "not read"));
 myLibrary.push(new Book("The Book of the New Sun", "Gene Wolfe", "1000", "read"));

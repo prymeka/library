@@ -19,6 +19,40 @@
     </header>
     <main>
       <div id="books-grid">
+        <div id="new-book-modal" class="modal">
+          <div class="modal-content">
+            <div id="modal-header">
+              <p>Add a New Book</p>
+              <span class="close">&times;</span>
+            </div>
+            <form id="book-form">
+
+              <label for="title-input">Title</label>
+              <input type="text" id="title-input" minlength="1" required>
+
+              <label for="author-input">Author</label>
+              <input type="text" id="author-input" minlength="1" required>
+
+              <label for="pages-input">Number of Pages</label>
+              <input type="number" min="1" id="pages-input" required>
+
+              <div id="radio-btn-container">
+                <div class="radio-input">
+                  <input type="radio" id="not-read-input" name="read-status" value="not read" checked>
+                  <label for="not-read">Not Read</label>
+                </div>
+
+                <div class="radio-input">
+                  <input type="radio" id="read-input" name="read-status" value="read">
+                  <label for="read">Read</label>
+                </div>
+              </div>
+
+              <button type="submit" form="book-form" id="submit-btn">Add</button>
+
+            </form>
+          </div>
+        </div>
       </div>
     </main>
 	</body>
